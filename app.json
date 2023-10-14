@@ -21,10 +21,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.proguade.labapplication"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b4d791fd-baec-4384-a673-7200465040b3"
+      }
+    },
+    "owner": "proguade",
+    "scheme": "labapplication"
   }
 }
