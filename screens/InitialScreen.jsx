@@ -43,15 +43,18 @@ const InitialScreen = () => {
         if (user) {
           setUserData(user);
           setIsLogged(true);
-          axiosInstance.post('/sendData', user).then((response) => {
-            console.log(response.data);
-          }).catch((error) => {
-            console.log(error);
-          });
         }
       });
     }
   }, [response]);
+
+  const sendData = () => {
+    axiosInstance.post('/sendData', user).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -68,6 +71,7 @@ const InitialScreen = () => {
           <Image source={{ uri: userData?.photoURL }} style={{ width: 100, height: 100 }} />
           <Text>{JSON.stringify(userData)}</Text>
           <Button onPress={() => handleSignOut()} title="Sign Out" />
+          <Button onPress={() => sendData()} title="Send Data" />
         </ScrollView>
       )}
     </View>
