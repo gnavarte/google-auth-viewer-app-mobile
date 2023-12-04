@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import Button from '../components/Button';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
@@ -42,19 +42,20 @@ const InitialScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('../assets/logo.png')} />
-      <Text style={styles.title}>Welcome to</Text>
-      <Text style={styles.title}>The Movie App</Text>
       {!isLogged ? (
+      <View>
+        <Image style={styles.image} source={require('../assets/logo.png')} />
+        <Text style={styles.title}>Welcome to</Text>
+        <Text style={styles.title}>The Movie App</Text>
         <Button onPress={() => promptAsync()} title="Login with Google" />
+      </View>
       ) : (
-        <View style={styles.loggedContainer}>
+        <ScrollView style={styles.loggedContainer}>
           <Text>Logged in</Text>
           <Image source={{ uri: userData?.photoURL }} style={{ width: 100, height: 100 }} />
-          <Text>{userData?.displayName}</Text>
-          <Text>{userData?.email}</Text>
+          <Text>{JSON.stringify(userData)}</Text>
           <Button onPress={() => handleSignOut()} title="Sign Out" />
-        </View>
+        </ScrollView>
       )}
     </View>
   );

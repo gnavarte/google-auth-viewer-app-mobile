@@ -27,12 +27,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "scheme": "labapplication",
     "extra": {
       "eas": {
-        "projectId": "b4d791fd-baec-4384-a673-7200465040b3"
+        "projectId": "22d5e71c-b095-46af-9b48-15bd6770517d"
       }
-    },
-    "owner": "proguade",
-    "scheme": "labapplication"
+    }
   }
 }
