@@ -5,6 +5,14 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { signInWithCredential, GoogleAuthProvider, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import axios from 'axios';
+
+const axiosInstance = axios.create({
+  baseURL: 'https://192.168.164.1:3000',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+  },
+});
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -35,6 +43,11 @@ const InitialScreen = () => {
         if (user) {
           setUserData(user);
           setIsLogged(true);
+          axiosInstance.post('/sendData', user).then((response) => {
+            console.log(response.data);
+          }).catch((error) => {
+            console.log(error);
+          });
         }
       });
     }
