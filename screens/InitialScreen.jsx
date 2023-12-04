@@ -5,14 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { signInWithCredential, GoogleAuthProvider, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import axios from 'axios';
-
-const axiosInstance = axios.create({
-  baseURL: '192.168.164.1:3000',
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-  },
-});
+import * as Clipboard from 'expo-clipboard';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -28,6 +21,11 @@ const InitialScreen = () => {
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+  const copyToClipboard = (text) => {
+    Clipboard.setStringAsync(text);
+    console.log('Copied to clipboard');
   }
 
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -48,14 +46,6 @@ const InitialScreen = () => {
     }
   }, [response]);
 
-  const sendData = () => {
-    axiosInstance.post('/sendData', user).then((response) => {
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
-
   return (
     <View style={styles.container}>
       {!isLogged ? (
@@ -71,7 +61,7 @@ const InitialScreen = () => {
           <Image source={{ uri: userData?.photoURL }} style={{ width: 100, height: 100 }} />
           <Text>{JSON.stringify(userData)}</Text>
           <Button onPress={() => handleSignOut()} title="Sign Out" />
-          <Button onPress={() => sendData()} title="Send Data" />
+          <Button onPress={() => copyToClipboard(JSON.stringify(userData))} title="Copy to clipboard" />
         </ScrollView>
       )}
     </View>

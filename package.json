@@ -12,6 +12,7 @@
     "axios": "^1.6.2",
     "expo": "~49.0.13",
     "expo-auth-session": "~5.0.2",
+    "expo-clipboard": "^4.5.0",
     "expo-crypto": "~12.4.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
