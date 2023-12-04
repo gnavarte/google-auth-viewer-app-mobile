@@ -8,7 +8,7 @@ import { auth } from '../firebaseConfig';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://192.168.164.1:3000',
+  baseURL: '192.168.164.1:3000',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },
